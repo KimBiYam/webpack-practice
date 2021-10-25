@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const path = require("path)");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -18,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\(ts|tsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },
@@ -42,6 +43,10 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[name].[id].css",
     }),
   ],
 };
